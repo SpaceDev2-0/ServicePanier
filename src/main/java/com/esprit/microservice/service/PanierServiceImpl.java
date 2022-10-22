@@ -35,18 +35,18 @@ public class PanierServiceImpl implements PanierService {
     }
 
     @Override
-    public void addProductToPanier(Long idProduct, Long idPanier, int quantity) {
+    public void addProductToPanier(Long idProduct, Long idPanier, int total) {
         Panier panier = panierRepository.findById(idPanier).get();
         panier.setIdProduit(idProduct);
-        panier.setQuantite(quantity);
+        panier.setTotal(total);
         panierRepository.save(panier);
     }
 
     @Override
-    public void removeProductFromPanier(Long idProduct, Long idPanier, int quantity) {
+    public void removeProductFromPanier(Long idProduct, Long idPanier, int total) {
         Panier panier = panierRepository.findById(idPanier).get();
         panier.setIdProduit(null);
-        panier.setQuantite(quantity);
+        panier.setTotal(total);
         panierRepository.save(panier);
     }
 
@@ -57,7 +57,7 @@ public class PanierServiceImpl implements PanierService {
 
     @Override
     public Panier getPanierById(Long idPanier) {
-        Panier panier = panierRepository.findById(idPanier).get();
+        Panier panier = panierRepository.findById(idPanier).isPresent() ? panierRepository.findById(idPanier).get() : null;
         return panier;
     }
 
@@ -74,6 +74,14 @@ public class PanierServiceImpl implements PanierService {
     @Override
     public void deletePanierById(Long idPanier) {
         panierRepository.deleteById(idPanier);
+    }
+
+    @Override
+    public void updatePanier(Long idPanier, Panier panier) {
+        Panier panier1 = panierRepository.findById(idPanier).get();
+        panier1.setIdProduit(panier.getIdProduit());
+        panier1.setTotal(panier.getTotal());
+        panierRepository.save(panier1);
     }
 
 }

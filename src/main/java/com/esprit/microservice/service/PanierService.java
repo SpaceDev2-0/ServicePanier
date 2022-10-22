@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface PanierService {
     void createPanier(Panier panier);
+    void updatePanier(Long idPanier, Panier panier);
     public void addProductToPanier(Long idProduct, Long idPanier);
     public void removeProductFromPanier(Long idProduct, Long idPanier);
     public void addProductToPanier(Long idProduct, Long idPanier, int quantity);

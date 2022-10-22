@@ -25,4 +25,25 @@ public class PanierController {
         return panierService.getAllPaniers();
     }
 
+    @DeleteMapping(value="/deletePanierById/{idPanier}")
+    public void deletePanierById(@PathVariable(value="idPanier") Long idPanier){
+        panierService.deletePanierById(idPanier);
+    }
+
+    @GetMapping(value="/getPanierById/{idPanier}")
+    public Panier getPanierById(@PathVariable(value="idPanier") Long idPanier){
+        return panierService.getPanierById(idPanier);
+    }
+
+    //update panier
+    @PutMapping(value="/updatePanier/{idPanier}")
+    public void updatePanier(@PathVariable(value="idPanier") Long idPanier, @RequestBody Panier panier){
+        panierService.updatePanier(idPanier, panier);
+    }
+
+    @GetMapping(value="/hello")
+    public String hello(){
+        return "hello";
+    }
+
 }
